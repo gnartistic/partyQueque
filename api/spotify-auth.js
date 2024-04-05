@@ -1,30 +1,22 @@
-const request = require('request');
+module.exports = (req, res) => {
+    try {
+        // Retrieve the token from the request headers
+        const token = req.headers.authorization;
 
-module.exports = async (req, res) => {
-    const CLIENT_ID = process.env.SPOTIFY_CLIENT_ID;
-    const CLIENT_SECRET = process.env.SPOTIFY_CLIENT_SECRET;
-
-    const authOptions = {
-        url: 'https://accounts.spotify.com/api/token',
-        headers: {
-            'Authorization': 'Basic ' + (Buffer.from(`${CLIENT_ID}:${CLIENT_SECRET}`).toString('base64'))
-        },
-        form: {
-            grant_type: 'client_credentials'
-        },
-        json: true
-    };
-
-    request.post(authOptions, function(error, response, body) {
-        if (!error && response.statusCode === 200) {
-            res.status(200).json({ accessToken: body.access_token });
-        } else {
-            console.error('Error details:', error || body);
-            res.status(500).json({
-                error: 'Internal Server Error',
-                details: error ? error.message : 'Unknown error',
-                response: body || 'No response data'
+        // Check if the token is present and valid
+        if (token && token === `Bearer ${process.env.AUTH_TOKEN}`) {
+            // Send the Spotify credentials
+            res.status(200).json({
+                client_id: process.env.SPOTIFY_CLIENT_ID,
+                client_secret: process.env.SPOTIFY_CLIENT_SECRET,
+                refresh_token: process.env.REFRESH_TOKEN
             });
+        } else {
+            // Unauthorized access
+            res.status(401).json({ error: 'Unauthorized' });
         }
-    });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An internal server error occurred' });
+    }
 };

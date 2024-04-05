@@ -1,28 +1,48 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import NowPlaying from './components/NowPlaying';
 import SearchSong from './components/SearchSong';
 import QueueButton from './components/QueueButton';
 import CashAppSection from './components/CashAppSection';
 import ContactInfo from './components/ContactInfo';
-import './App.scss'; // You handle the styling here
+import './App.scss';
 
-function App ()
-{
-  
-  const client_id = process.env.SPOTIFY_CLIENT_ID;
-  const client_secret = process.env.SPOTIFY_CLIENT_ID;
-  const refresh_token = process.env.SPOTIFY_CLIENT_ID;
+function App() {
+  const [spotifyCredentials, setSpotifyCredentials] = useState(null);
 
-  console.log( client_id );
-  
+  useEffect(() => {
+  const fetchSpotifyCredentials = async () => {
+  try {
+    const authToken = 'xS3adzX3byAGXiEzpw'; // Your authorization token
+    const headers = new Headers({
+      'Authorization': `Bearer ${authToken}`
+    });
+    const response = await fetch('/api/spotify-auth', { headers });
+    if (!response.ok) {
+      throw new Error('Failed to fetch Spotify credentials');
+    }
+    const data = await response.json();
+    setSpotifyCredentials(data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+
+    fetchSpotifyCredentials();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
         {/* <h1>Welcome to the Party!</h1> */}
       </header>
-      <NowPlaying client_id={client_id}
-        refresh_token={refresh_token}
-        client_secret={client_secret} />
+      {spotifyCredentials && (
+        <NowPlaying
+          client_id={spotifyCredentials.client_id}
+          client_secret={spotifyCredentials.client_secret}
+          refresh_token={spotifyCredentials.refresh_token}
+        />
+      )}
       <SearchSong />
       <QueueButton />
       <CashAppSection />
