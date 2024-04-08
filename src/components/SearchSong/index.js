@@ -85,7 +85,7 @@ const SearchSong = ({ client_id, client_secret, refresh_token }) => {
     return (
         <div className='songSearch'>
             <div className='input-box'>
-                <box-icon name='search-alt' color='	#1db954'></box-icon>
+                <box-icon name='search-alt' color='	#1db954' size='cssSize' animation='tada'></box-icon>
                 <input
                     type="text"
                     value={searchQuery}

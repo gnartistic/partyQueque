@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios';
-import './index.scss';
+import { toast } from 'react-toastify';
 import 'boxicons';
 
 const QUEUE_ENDPOINT = `https://api.spotify.com/v1/me/player/queue`;
@@ -23,14 +23,18 @@ const QueueButton = ({ accessToken, songURI }) => {
             );
 
             console.log('Song added to queue:', response.data);
+            // Show success toast notification
+            toast.success('Song added to queue successfully!');
         } catch (error) {
             console.error('Error adding song to queue:', error);
+            // Show error toast notification
+            toast.error('Failed to add song to queue');
         }
     };
 
     return (
         <div className='plus-button' onClick={addToQueue}>
-            <box-icon name='plus-circle' color='	#1db954' size='md'></box-icon>
+            <box-icon name='plus-circle' color='#1db954' size='md'></box-icon>
         </div>
     );
 };

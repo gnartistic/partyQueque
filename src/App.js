@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import NowPlaying from './components/NowPlaying';
 import SearchSong from './components/SearchSong';
-import QueueButton from './components/QueueButton';
 import CashAppSection from './components/CashAppSection';
 import ContactInfo from './components/ContactInfo';
 import './App.scss';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
-  const [spotifyCredentials, setSpotifyCredentials] = useState(null);
+  const [ spotifyCredentials, setSpotifyCredentials ] = useState( null );
+  
+  const toastStyle = {
+    background: 'black',
+  };
 
   useEffect(() => {
   const fetchSpotifyCredentials = async () => {
@@ -49,6 +54,7 @@ function App() {
       )}
       <CashAppSection />
       <ContactInfo />
+      <ToastContainer toastStyle={toastStyle} />
     </div>
   );
 }
