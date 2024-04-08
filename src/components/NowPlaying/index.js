@@ -3,45 +3,48 @@ import getNowPlayingItem from "./nowPlaying.js";
 
 import "./SpotifyPlayer.scss";
 
-function SpotifyPlayer ( props )
-{
-    const [ result, setResult ] = useState( {} );
+function SpotifyPlayer(props) {
+    const [nowPlaying, setNowPlaying] = useState(null);
 
-    useEffect( () =>
-    {
-        Promise.all( [
-            getNowPlayingItem(
+    useEffect(() => {
+        // Immediately fetch data when the component mounts
+        fetchData();
+
+        // Set up a timer to fetch data periodically after an initial load
+        const intervalId = setInterval(fetchData, 5000);
+
+        return () => clearInterval(intervalId); // Cleanup interval on component unmount
+    }, [props.client_id, props.client_secret, props.refresh_token]);
+
+    const fetchData = async () => {
+        try {
+            const result = await getNowPlayingItem(
                 props.client_id,
                 props.client_secret,
                 props.refresh_token
-            ),
-        ] ).then( ( results ) =>
-        {
-            setResult( results[ 0 ] );
-        } );
-    }, [] );
+            );
+            setNowPlaying(result);
+        } catch (error) {
+            console.error('Error fetching now playing:', error);
+        }
+    };
 
-    return result.isPlaying ? (
+    return nowPlaying ? (
         <div className="nowplayingcard">
             <div className="nowplayingcontainer-inner">
-                <img id="trackart" src={result.albumImageUrl} alt="album cover"></img>
+                <img id="trackart" src={nowPlaying.albumImageUrl} alt="album cover"></img>
                 <div className="trackInfo">
-                    <h1 className="trackTitle">
-                        {result.title}
-                    </h1>
-                    <h2 className="trackArtist">
-                        {result.artist}
-                    </h2>
+                    <h1 className="trackTitle">{nowPlaying.title}</h1>
+                    <h2 className="trackArtist">{nowPlaying.artist}</h2>
                 </div>
             </div>
         </div>
     ) : (
-            <div className="waiting-text">
-                <h1>
-                    Music will starts soon!
-                </h1>
+        <div className="waiting-text">
+            <h1>Let me cook...</h1>
         </div>
     );
 }
 
 export default SpotifyPlayer;
+

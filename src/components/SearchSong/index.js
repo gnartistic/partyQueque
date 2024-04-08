@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.scss';
 import QueueButton from '../QueueButton'; // Import the QueueButton component
+import 'boxicons';
 
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const SEARCH_ENDPOINT = `https://api.spotify.com/v1/search`;
@@ -84,6 +85,7 @@ const SearchSong = ({ client_id, client_secret, refresh_token }) => {
     return (
         <div className='songSearch'>
             <div className='input-box'>
+                <box-icon name='search-alt' color='	#1db954'></box-icon>
                 <input
                     type="text"
                     value={searchQuery}

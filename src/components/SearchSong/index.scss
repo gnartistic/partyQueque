@@ -1,92 +1,105 @@
 .songSearch {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 
-    .input-box{
+
+    .input-box {
         display: flex;
         flex-direction: row;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
-        margin: 40px;
+        padding: 10px;
+        width: 70vw;
+        border-radius: 35px;
+        background-color: #fff;
+
         input {
-            padding: 10px;
-            width: 80vw;
-            border-radius: 35px;
+            padding-left: 10px;
+            /* Remove borders */
+            border: none;
+            /* Remove background */
+            background: none;
+            /* Remove outline */
+            outline: none;
+            /* Remove box shadow */
+            box-shadow: none;
+            /* Optionally adjust padding and margin as needed */
+            margin: 0;
+            /* Optionally adjust font properties */
+            font-family: inherit;
+            font-size: inherit;
         }
-        
-            .search {
-                height: 100%;
-                background-color: #1db954;
-                padding: 10px;
-                border-radius: 35px;
-                border: none;
-                
-            }
+
+        .search {
+            height: 100%;
+            background-color: #1db954;
+            padding: 10px;
+            border-radius: 35px;
+            border: none;
+
+        }
     }
 }
 
-.songList{
-    height: 50%;
-    width: 90vw;
-    padding: 30px;
+.songList {
+    height: 60%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 
-    ul{
-        width: 80%;
+    ul {
         display: flex;
         justify-content: flex-start;
         align-items: center;
         flex-direction: column;
         overflow-y: scroll;
         height: 600px;
-        background-color: #212121;
-        border-radius: 20px;
+        background-color: #2121217b;
+        border-radius: 10px;
+        padding: 0 !important;
 
-        li{
+        li {
             display: flex;
             flex-direction: row;
             height: 100px;
-            width: 100%;
-            margin: 20px;
+            width: 90%;
+            margin: 10px;
             padding-bottom: 20px;
             border-bottom: 1px solid #121212;
 
             .songInfo {
 
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
 
-            .song {
-                color: #b3b3b3;
+                .song {
+                    color: #b3b3b3;
                     text-align: left;
                     width: 80%;
                     margin: 0 !important;
                     padding-bottom: 10px;
 
-            }
-            
+                }
+
                 .artist {
                     width: 80%;
-                        color: #535353;
-                        text-align: left;
-                        margin: 0 !important;
+                    color: #535353;
+                    text-align: left;
+                    margin: 0 !important;
                 }
-        }
-
-            .album{
-                height: 100%;
             }
 
-            .reqButton{
-                background-color: #1db954;
-                border-radius: 35px;
-                padding: 10px;
-                height: 40%;
-                position:-webkit-sticky;
-                right: 500px;
+            .album {
+                height: 100%;
             }
         }
     }

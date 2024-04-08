@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import './index.scss';
+import 'boxicons';
 
 const QUEUE_ENDPOINT = `https://api.spotify.com/v1/me/player/queue`;
 
@@ -27,7 +29,9 @@ const QueueButton = ({ accessToken, songURI }) => {
     };
 
     return (
-        <button onClick={addToQueue}>Add to Queue</button>
+        <div className='plus-button' onClick={addToQueue}>
+            <box-icon name='plus-circle' color='	#1db954' size='md'></box-icon>
+        </div>
     );
 };
 

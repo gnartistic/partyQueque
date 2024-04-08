@@ -49,3 +49,54 @@
     }
   }
 }
+
+/* CSS for screens up to 767px wide (typically mobile screens) */
+@media (max-width: 767px) {
+  .nowplayingcard {
+      width: 90vw;
+      height: 135px !important;
+      display: flex;
+      align-items: center;
+  
+      .nowplayingcontainer-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 5px !important;
+        height: 100% !important;
+  
+  
+        #trackart {
+          width: 30% !important;
+          border-radius: 20px;
+  
+        }
+  
+        .trackInfo {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          width: 60%;
+  
+          .trackTitle {
+            color: #b3b3b3;
+            text-align: left;
+            width: 80%;
+            margin: 0 !important;
+            padding-bottom: 5px;
+            font-size: 15px !important;
+          }
+  
+          .trackArtist {
+            width: 80%;
+            color: #535353;
+            text-align: left;
+            margin: 0 !important;
+            font-size: 15px !important;
+          }
+        }
+      }
+    }
+}

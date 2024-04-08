@@ -47,7 +47,6 @@ function App() {
           refresh_token={spotifyCredentials.refresh_token}
         />
       )}
-      <QueueButton />
       <CashAppSection />
       <ContactInfo />
     </div>
