@@ -1,11 +1,34 @@
 import React from 'react';
+import axios from 'axios';
 
-function QueueButton() {
-  return (
-    <div>
-      <button>Add to Queue</button>
-    </div>
-  );
-}
+const QUEUE_ENDPOINT = `https://api.spotify.com/v1/me/player/queue`;
+
+const QueueButton = ({ accessToken, songURI }) => {
+    const addToQueue = async () => {
+        try {
+            const response = await axios.post(
+                QUEUE_ENDPOINT,
+                {},
+                {
+                    params: {
+                        uri: songURI,
+                    },
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                        "Content-Type": "application/json",
+                    },
+                }
+            );
+
+            console.log('Song added to queue:', response.data);
+        } catch (error) {
+            console.error('Error adding song to queue:', error);
+        }
+    };
+
+    return (
+        <button onClick={addToQueue}>Add to Queue</button>
+    );
+};
 
 export default QueueButton;

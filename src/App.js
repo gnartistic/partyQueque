@@ -33,9 +33,6 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        {/* <h1>Welcome to the Party!</h1> */}
-      </header>
       {spotifyCredentials && (
         <NowPlaying
           client_id={spotifyCredentials.client_id}
@@ -43,7 +40,13 @@ function App() {
           refresh_token={spotifyCredentials.refresh_token}
         />
       )}
-      <SearchSong />
+      {spotifyCredentials && (
+        <SearchSong
+          client_id={spotifyCredentials.client_id}
+          client_secret={spotifyCredentials.client_secret}
+          refresh_token={spotifyCredentials.refresh_token}
+        />
+      )}
       <QueueButton />
       <CashAppSection />
       <ContactInfo />
