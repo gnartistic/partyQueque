@@ -7,20 +7,23 @@
 }
 
 .nowplayingcard {
-  width: 90vw;
+  height: 300px;
+    width: 700px;
   background-color: #212121;
   border-radius: 20px;
+  display: flex;
+    align-items: center;
 
   .nowplayingcontainer-inner {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
-    padding: 25px;
+    padding: 0px 20px 0px 20px;
 
 
     #trackart {
-      width: 40%;
+      width: 250px;
       border-radius: 20px;
 
     }
@@ -53,8 +56,8 @@
 /* CSS for screens up to 767px wide (typically mobile screens) */
 @media (max-width: 767px) {
   .nowplayingcard {
-      width: 90vw;
-      height: 135px !important;
+      width: 95vw;
+        height: 125px !important;
       display: flex;
       align-items: center;
   
@@ -63,13 +66,13 @@
         flex-direction: row;
         align-items: center;
         justify-content: flex-start;
-        padding: 5px !important;
+        padding: 0 15px 0 15px !important;
         height: 100% !important;
   
   
         #trackart {
-          width: 30% !important;
-          border-radius: 20px;
+          width: 100px !important;
+            border-radius: 5px;
   
         }
   
@@ -85,7 +88,7 @@
             text-align: left;
             width: 80%;
             margin: 0 !important;
-            padding-bottom: 5px;
+            padding-bottom: 2px;
             font-size: 15px !important;
           }
   

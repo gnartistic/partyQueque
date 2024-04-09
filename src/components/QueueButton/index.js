@@ -5,8 +5,10 @@ import 'boxicons';
 
 const QUEUE_ENDPOINT = `https://api.spotify.com/v1/me/player/queue`;
 
-const QueueButton = ({ accessToken, songURI }) => {
-    const addToQueue = async () => {
+const QueueButton = ( { accessToken, songURI } ) =>
+{
+    const addToQueue = async () =>
+    {
         try {
             const response = await axios.post(
                 QUEUE_ENDPOINT,
@@ -16,26 +18,26 @@ const QueueButton = ({ accessToken, songURI }) => {
                         uri: songURI,
                     },
                     headers: {
-                        Authorization: `Bearer ${accessToken}`,
+                        Authorization: `Bearer ${ accessToken }`,
                         "Content-Type": "application/json",
                     },
                 }
             );
 
-            console.log('Song added to queue:', response.data);
+            console.log( 'Song added to queue:', response.data );
             // Show success toast notification
-            toast.success('Song added to queue successfully!');
-        } catch (error) {
-            console.error('Error adding song to queue:', error);
+            toast.success( 'Song added to queue successfully!' );
+        } catch( error ) {
+            console.error( 'Error adding song to queue:', error );
             // Show error toast notification
-            toast.error('Failed to add song to queue');
+            toast.error( 'Failed to add song to queue' );
         }
     };
 
     return (
-        <div className='plus-button' onClick={addToQueue}>
-            <box-icon name='plus-circle' color='#1db954' size='md'></box-icon>
-        </div>
+        <div className="button-container">
+            <box-icon name='plus-circle' color='#1db954' size='lg' onClick={addToQueue}></box-icon>
+            </div>
     );
 };
 
