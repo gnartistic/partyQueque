@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './index.scss';
-import QueueButton from '../QueueButton'; // Import the QueueButton component
+import QueueButton from '../QueueButton';
 import 'boxicons';
+import { themeAtom } from "../../atoms/theme";
+import { useAtom } from 'jotai';
+import theme from "../../theme";
+import { Flex, Text, Input, Image, Box } from '@chakra-ui/react';
+import { Search2Icon } from "@chakra-ui/icons";
 
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const SEARCH_ENDPOINT = `https://api.spotify.com/v1/search`;
@@ -37,7 +42,7 @@ const getAccessToken = async ( client_id, client_secret, refresh_token ) =>
 const SearchSong = ( { client_id, client_secret, refresh_token } ) =>
 {
     const [ searchQuery, setSearchQuery ] = useState( '' );
-    const [ searchResults, setSearchResults ] = useState( [] );
+    const [ searchResFlexts, setSearchResFlexts ] = useState( [] );
     const [ accessToken, setAccessToken ] = useState( '' );
 
     useEffect( () =>
@@ -68,7 +73,7 @@ const SearchSong = ( { client_id, client_secret, refresh_token } ) =>
                 },
             } );
 
-            setSearchResults( response.data.tracks.items );
+            setSearchResFlexts( response.data.tracks.items );
         } catch( error ) {
             console.error( 'Error searching songs:', error );
         }
@@ -80,48 +85,62 @@ const SearchSong = ( { client_id, client_secret, refresh_token } ) =>
         setSearchQuery( inputText );
 
         if( inputText.trim() === '' ) {
-            // Clear search results if the input is empty
-            setSearchResults( [] );
+            // Clear search resFlexts if the input is empty
+            setSearchResFlexts( [] );
         } else {
             // Otherwise, perform search
             searchSongs();
         }
     };
 
+    const [ themeName, setThemeName ] = useAtom( themeAtom );
+    const activeTheme = theme.colors[ themeName ] || theme.colors.black;
+
     return (
-        <div className='songSearch'>
-            <div className='input-box'>
-                <box-icon name='search-alt' color='	#1db954' size='cssSize'></box-icon>
-                <input
+        <Flex className='songSearch' gap={6}>
+            <Flex flexDirection="row" justifyContent="flex-start" alignItems="center" pl={4} py={2} width={{ base: "90vw", lg: "75vw" }} borderRadius="20px" bg={activeTheme.accent}>
+                <Search2Icon name='search-alt' color={activeTheme.background} />
+                <Input
+                    fontSize={{ base: "16px", lg: "20px" }}
+                    color={activeTheme.background}
+                    _focus={{ outline: "none", border: "none", boxShadow: "none" }}
+                    _hover={{}}
+                    border="none"
+                    bg="transparent"
+                    pl={2}
+                    width="90%"
                     type="text"
                     value={searchQuery}
                     onChange={handleSearchInputChange}
                     placeholder="Search for a song..."
                 />
-            </div>
-                <ul>
-                    {searchResults.map( ( song ) => (
-                        <li key={song.id}>
-                                <img className='album' src={song.album.images[ 0 ].url} alt={song.name} />
-                                <div className='songInfo'>
-                                    <h5 className='song'>{song.name}</h5>
-                                    <h5 className='artist'>{song.artists.map( ( artist ) => artist.name ).join( ', ' )}</h5>
-                                    {/* Render the QueueButton component */}
-                                    <div className='plus-button'>
-                                    </div>
-                                </div>
-                            <QueueButton
-                                accessToken={accessToken}
-                                client_id={client_id}
-                                client_secret={client_secret}
-                                refresh_token={refresh_token}
-                                song={song}
-                                songURI={song.uri}
-                            />
-                        </li>
-                    ) )}
-                </ul>
-        </div>
+            </Flex>
+            <Flex flexDirection="column" justifyContent="flex-start" alignItems="center" overflowY="scroll" height="500px" width={{ base: "90vw", lg: "75vw" }} borderRadius="20px"
+                bg={activeTheme.primary}>
+                {searchResFlexts.map( ( song ) => (
+                    <Flex key={song.id} justifyContent="space-between" px={4} py={6} width="90%">
+                        <Flex gap={4}>
+                            <Image height={{ base: "75px", lg: "75px" }} src={song.album.images[ 0 ].url} alt={song.name} />
+                            <Flex justifyContent="flex-start" flexDirection="column" textAlign="left">
+                                <Text color={activeTheme.background}  className='song' fontSize={{base: "16px", lg: "18px"}}>{song.name}</Text>
+                                <Text color={activeTheme.background}  className='artist' fontSize={{base: "18px", lg: "20px"}}>{song.artists.map( ( artist ) => artist.name ).join( ', ' )}</Text>
+                                {/* Render the QueueButton component */}
+                                <Flex className='plus-button'>
+                                </Flex>
+                            </Flex>
+                        </Flex>
+                        <QueueButton
+                            accessToken={accessToken}
+                            client_id={client_id}
+                            client_secret={client_secret}
+                            refresh_token={refresh_token}
+                            song={song}
+                            songURI={song.uri}
+                        />
+                    </Flex>
+                ) )}
+            </Flex>
+        </Flex>
     );
 };
 

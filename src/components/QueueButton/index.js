@@ -2,6 +2,11 @@ import React from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'boxicons';
+import { Flex } from '@chakra-ui/react';
+import { AddIcon, CheckCircleIcon } from "@chakra-ui/icons";
+import { themeAtom } from "../../atoms/theme";
+import { useAtom } from 'jotai';
+import theme from "../../theme";
 
 const QUEUE_ENDPOINT = `https://api.spotify.com/v1/me/player/queue`;
 
@@ -34,10 +39,13 @@ const QueueButton = ( { accessToken, songURI } ) =>
         }
     };
 
+    const [ themeName, setThemeName ] = useAtom( themeAtom );
+    const activeTheme = theme.colors[ themeName ] || theme.colors.black;
+
     return (
-        <div className="button-container">
-            <box-icon name='plus-circle' color='#1db954' size='lg' onClick={addToQueue}></box-icon>
-            </div>
+        <Flex justifyContent="center" alignItems="center" height="100%">
+            <box-icon name='plus-circle' color={activeTheme.background} size='lg' onClick={addToQueue}></box-icon>
+            </Flex>
     );
 };
 

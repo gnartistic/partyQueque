@@ -1,12 +1,19 @@
 import React from 'react';
-import './index.scss';
-
-function CashAppSection() {
+import { Heading, Flex, Link } from '@chakra-ui/react';
+import { themeAtom } from "../../atoms/theme";
+import { useAtom } from 'jotai';
+import theme from "../../theme";
+function CashAppSection ()
+{
+    const [ themeName, setThemeName ] = useAtom( themeAtom );
+    const activeTheme = theme.colors[ themeName ] || theme.colors.black;
   return (
-    <div className='cashapp-container'>
-      <h2 className='message'>Support the DJ!</h2><a className='cashapp-link' href='https://cash.app/$MrHoustxn'> CashApp: $MrHoustxn
-        </a>
-    </div>
+    <Flex className='cashapp-container' flexDirection="column" width="100%" justifyContent="center" alignItems="center">
+      <Heading  color={activeTheme.primary} className='message'>Support the DJ!
+      </Heading>
+      <Link _hover={{textDecoration: "none"}} bg={activeTheme.primary} borderRadius="30px" px={8} py={4} color={activeTheme.background} className='cashapp-link' fontSize={{base: "18px", lg:"22px"}} href='https://cash.app/$MrHoustxn'> CashApp: $MrHoustxn
+        </Link>
+    </Flex>
   );
 }
 
