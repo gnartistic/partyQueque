@@ -5,7 +5,6 @@ import { themeAtom } from "../../atoms/theme";
 import theme from "../../theme";
 import { queueAtom } from "../../atoms/queueAtom";
 import getQueueItems from "./getQueue.js";
-import getNowPlayingItem from "../NowPlaying/nowPlaying.js";
 
 const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
 {
@@ -19,7 +18,7 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
   const [ queue, setQueue ] = useAtom( queueAtom );
   const activeTheme = theme.colors[ themeName ] || theme.colors.black;
 
-  const isSidebar = useBreakpointValue( { base: false, md: true } ); // Sidebar for md+, row for base
+  const isSidebar = useBreakpointValue( { base: false, xl: true } ); // Sidebar for md+, row for base
 
   useEffect( () =>
   {
@@ -42,14 +41,15 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
     <Flex
       mt={{ base: -4, lg: 0 }}
       direction={isSidebar ? "column" : "row"}
-      width={isSidebar ? "150px" : "90vw"}
+      width={{base: "90vw", xl: "150px"}}
       height={isSidebar ? "753px" : "100px"}
-      bgGradient={{ base: "none", lg: `linear(to-b, ${ activeTheme.accent }, ${ activeTheme.primary })` }}
+      bgGradient={{ base: "none", xl: `linear(to-b, ${ activeTheme.accent }, ${ activeTheme.primary })` }}
       alignItems="center"
       gap={2}
       py={{ base: 0, lg: 4 }}
       borderRadius={{ base: '20px', lg: "20px" }}
-      borderTopRadius={{base: "0px", lg: "20px"}}
+      borderTopRadius={{ base: "0px", lg: "20px" }}
+      style={{ ...hiddenScrollbarStyle }}
     >
       {isSidebar && (
         <Text color={activeTheme.background} fontWeight="bold" fontSize={{ base: '14px', lg: "16px" }}>
@@ -78,7 +78,7 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
               <Image
                 src={track.albumImageUrl}
                 alt={track.title}
-                boxSize={{ base: "50px", lg: "100px" }}
+                boxSize={{ base: "50px", xl: "100px" }}
                 borderRadius="10px"
               />
               {/* <Box>

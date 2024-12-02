@@ -16,7 +16,7 @@ function App ()
 {
   const [ spotifyCredentials, setSpotifyCredentials ] = useState( null );
   const [ themeName ] = useAtom( themeAtom );
-  const isMobile = useBreakpointValue( { base: true, lg: false } );
+  const isMobile = useBreakpointValue( { base: true, xl: false } );
   const activeTheme = theme.colors[ themeName ] || theme.colors.black || {
     background: "#ffffff",
     primary: "#444",
@@ -49,7 +49,6 @@ function App ()
     <Flex
       height={{ base: "100vh", lg: "100vh" }}
       width="100vw"
-      overflowY="scroll"
       gap={{ base: 4, lg: 0 }}
       flexDirection="column"
       justifyContent={{ base: 'flex-start', lg: "flex-start" }}
@@ -58,9 +57,9 @@ function App ()
         backgroundColor: activeTheme.background,
         transition: "background-color 0.5s ease, color 0.5s ease",
       }}
-      pb={{ base: 20, lg: 0 }}>
+      pb={{ base: 0, lg: 0 }}>
       <Flex width={{ base: '100vw', lg: "100vw" }} height={{ base: "auto", lg: "auto" }} justifyContent="center" alignItems="center">
-        <Flex width="90vw" justifyContent="space-between" alignItems="center">
+        <Flex width="90vw" justifyContent="space-between" alignItems="center" height="80px">
           <Text className="app-name" color={activeTheme.primary} fontSize={{ base: "40px", lg: "68px" }}>
             VIBEIFY.AI
           </Text>
@@ -69,17 +68,18 @@ function App ()
           )}
         </Flex>
       </Flex>
-      <Flex
-        height="auto"
+      <Flex pt={{base: 0, lg: 6}}
+        height="100%"
         width="100vw"
+        overflowY="scroll"
         gap={{ base: 4, lg: 8 }}
         flexDirection="row"
         justifyContent={{ base: 'center', lg: "center" }}
-        alignItems={{ base: "center", lg: "flex-start" }}>
+        alignItems={{ base: "flex-start", lg: "flex-start" }}>
         <Flex
           mt={{ base: 0, lg: 0 }}
           gap={{base:2 ,lg: 6}}
-          width={{base: "auto", lg: "80%"}}
+          width={{base: "auto", xl: "80vw"}}
           height="auto"
           minHeight="auto"
           flexDirection="column"
@@ -112,7 +112,7 @@ function App ()
           <ToastContainer autoClose={1500} hideProgressBar closeOnClick position="top-center" />
         </Flex>
         {spotifyCredentials && !isMobile && (
-          <Flex flexDirection="column" alignItems="center" gap={10}>
+          <Flex flexDirection="column" alignItems="center" gap={8}>
             {!isMobile && (
               <ThemeToggle />
             )}

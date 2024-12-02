@@ -40,7 +40,8 @@ const ThemeToggle = () =>
 
   return (
     <Box borderRadius="full">
-      <IconButton
+      <IconButton mt={{base: 0, lg: 3}}
+        zIndex={9999}
         aria-label="Toggle theme"
         borderRadius="50%"
         onClick={toggleTheme}
@@ -51,8 +52,8 @@ const ThemeToggle = () =>
         _hover={{}}
         _active={{}}
         _focus={{ boxShadow: "none" }}
-        width={{ base: "44px", lg: "6.12em" }}
-        height={{ base: "44px", lg: "6.12em" }}
+        width={{ base: "44px", xl: "6.12em" }}
+        height={{ base: "44px", xl: "6.12em" }}
         animation={isAnimating ? `${ popEffect } 1s ease` : "none"}
       />
     </Box>

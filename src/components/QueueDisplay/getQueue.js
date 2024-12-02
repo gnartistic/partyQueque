@@ -1,6 +1,6 @@
 import queryString from "query-string";
 import { queueAtom } from "../../atoms/queueAtom";
-import { atom, useSetAtom } from "jotai";
+import { atom } from "jotai";
 
 const TOKEN_ENDPOINT = `https://accounts.spotify.com/api/token`;
 const QUEUE_ENDPOINT = `https://api.spotify.com/v1/me/player/queue`;
@@ -56,7 +56,7 @@ export default async function getQueueItems (
     client_id,
     client_secret,
     refresh_token,
-    setQueue // Pass `setQueue` to update queueAtom
+    setQueue // Pass `setQueue` function to update the atom
 )
 {
     try {
@@ -64,7 +64,7 @@ export default async function getQueueItems (
 
         // If the queue is empty, clear the atom
         if( !queueData.queue || queueData.queue.length === 0 ) {
-            setQueue( [] );
+            setQueue( [] ); // Update queueAtom with an empty array
             return [];
         }
 
