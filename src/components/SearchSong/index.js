@@ -97,8 +97,8 @@ const SearchSong = ( { client_id, client_secret, refresh_token } ) =>
     const activeTheme = theme.colors[ themeName ] || theme.colors.black;
 
     return (
-        <Flex className='songSearch' gap={6}>
-            <Flex flexDirection="row" justifyContent="flex-start" alignItems="center" pl={4} py={2} width={{ base: "90vw", lg: "75vw" }} borderRadius="20px" bg={activeTheme.accent}>
+        <Flex className='songSearch' gap={6} mt={6}>
+            <Flex flexDirection="row" height="70px" justifyContent="flex-start" alignItems="center" pl={4} py={2} width={{ base: "90vw", lg: "75vw" }} borderRadius="20px" bg={activeTheme.accent}>
                 <Search2Icon name='search-alt' color={activeTheme.background} />
                 <Input
                     fontSize={{ base: "16px", lg: "20px" }}

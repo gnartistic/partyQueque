@@ -39,7 +39,7 @@ function SpotifyPlayer ( props )
     const activeTheme = theme.colors[ themeName ] || theme.colors.black;
 
     return nowPlaying ? (
-        <Flex height={{base: '120px', lg:"300px"}} width={{ base: "90vw", lg: "75vw" }} borderRadius="20px" alignItems="center" bgGradient={`linear(to-t, ${activeTheme.accent}, ${activeTheme.primary})`}>
+        <Flex height={{base: '120px', lg:"300px"}} width={{ base: "90vw", lg: "75vw" }} borderTopRadius="20px" alignItems="center" bgGradient={`linear(to-t, ${activeTheme.background}, ${activeTheme.primary})`}>
             <Flex flexDirection="row" alignItems="center"
                 p={4} justifyContent="center" px="20px" gap={{base: 4, lg: 10}} width="100%">
                 <Image width={{ base: "80px", lg: "250px" }} borderRadius="20px" src={nowPlaying.albumImageUrl} alt="album cover" />

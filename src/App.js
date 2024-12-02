@@ -46,11 +46,12 @@ function App ()
 
   return (
     <Flex
-      height="100vh"
+      height={{base: "100vh", lg: "100vh"}}
       width="100vw"
+      overflowY="scroll"
       gap={{base: 4, lg: 10}}
       flexDirection={{base: "column-reverse", lg: "row"}}
-      justifyContent="center"
+      justifyContent={{base: 'flex-start', lg: "center"}}
       alignItems={{base: "center", lg: "flex-start"}}
         style={{
           backgroundColor: activeTheme.background,
