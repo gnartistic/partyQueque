@@ -54,15 +54,15 @@ const customTheme = extendTheme({
     },
     // Black customTheme
     black: {
-      background: "#000000", // Dark gray background
-      primary: "#B0B8BF",    // White text
+      background: "#1f2125", // Dark gray background
+      primary: "#ffffff",    // White text
       secondary: "#2d3748",  // Gray
       accent: "#F4F5F6",     // Lighter gray
     },
     // White customTheme
     white: {
       background: "#ffffff", // White background
-      primary: "#1a202c",    // Black text
+      primary: "#1f2125",    // Black text
       secondary: "#718096",  // Gray
       accent: "#444444",     // Lighter gray
     },

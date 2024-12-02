@@ -39,13 +39,13 @@ function SpotifyPlayer ( props )
     const activeTheme = theme.colors[ themeName ] || theme.colors.black;
 
     return nowPlaying ? (
-        <Flex height={{base: '120px', lg:"300px"}} width={{ base: "90vw", lg: "75vw" }} borderTopRadius="20px" alignItems="center" bgGradient={`linear(to-t, ${activeTheme.background}, ${activeTheme.primary})`}>
+        <Flex height={{base: '150px', lg:"300px"}} width={{ base: "90vw", lg: "100%" }} borderTopRadius="20px" alignItems={{base: "flex-start", lg: "center"}} bgGradient={`linear(to-t, ${activeTheme.background}, ${activeTheme.primary})`} >
             <Flex flexDirection="row" alignItems="center"
-                p={4} justifyContent="center" px="20px" gap={{base: 4, lg: 10}} width="100%">
+                p={{base:4, lg: 4}} justifyContent="center" px="20px" gap={{base: 4, lg: 10}} width="100%">
                 <Image width={{ base: "80px", lg: "250px" }} borderRadius="20px" src={nowPlaying.albumImageUrl} alt="album cover" />
                 <Flex justifyContent="center" alignItems="flex-start" width="75%" flexDirection="column">
-                    <Text fontWeight="500" color={activeTheme.background} textAlign="left" fontSize={{ base: "20px", lg: "26px" }} className="trackTitle">{nowPlaying.title}</Text>
-                    <Text fontWeight="600" textAlign="left" fontSize={{ base: "20px", lg: "28px" }} color={activeTheme.background} className="trackArtist">{nowPlaying.artist}</Text>
+                    <Text fontWeight="500" color={activeTheme.background} textAlign="left" fontSize={{ base: "14px", lg: "26px" }} className="trackTitle">{nowPlaying.title}</Text>
+                    <Text fontWeight="600" textAlign="left" fontSize={{ base: "16px", lg: "28px" }} color={activeTheme.background} className="trackArtist">{nowPlaying.artist}</Text>
                 </Flex>
             </Flex>
         </Flex>

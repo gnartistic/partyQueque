@@ -9,13 +9,14 @@ import ThemeToggle from "./components/ThemeToggle";
 import { useAtom } from "jotai";
 import { themeAtom } from "./atoms/theme";
 import theme from "./theme";
-import { Flex, Box } from "@chakra-ui/react";
+import { Flex, Box, Text, useBreakpointValue } from "@chakra-ui/react";
 import QueueDisplay from "./components/QueueDisplay";
 
 function App ()
 {
   const [ spotifyCredentials, setSpotifyCredentials ] = useState( null );
   const [ themeName ] = useAtom( themeAtom );
+  const isMobile = useBreakpointValue( { base: true, lg: false } );
   const activeTheme = theme.colors[ themeName ] || theme.colors.black || {
     background: "#ffffff",
     primary: "#444",
@@ -46,61 +47,82 @@ function App ()
 
   return (
     <Flex
-      height={{base: "100vh", lg: "100vh"}}
+      height={{ base: "100vh", lg: "100vh" }}
       width="100vw"
       overflowY="scroll"
-      gap={{base: 4, lg: 10}}
-      flexDirection={{base: "column-reverse", lg: "row"}}
-      justifyContent={{base: 'flex-start', lg: "center"}}
-      alignItems={{base: "center", lg: "flex-start"}}
-        style={{
-          backgroundColor: activeTheme.background,
-          color: activeTheme.primary,
-          transition: "background-color 0.5s ease, color 0.5s ease",
+      gap={{ base: 4, lg: 0 }}
+      flexDirection="column"
+      justifyContent={{ base: 'flex-start', lg: "flex-start" }}
+      alignItems={{ base: "center", lg: "flex-start" }}
+      style={{
+        backgroundColor: activeTheme.background,
+        transition: "background-color 0.5s ease, color 0.5s ease",
       }}
-    pb={{base: 20, lg: 0}}>
-      <Flex
-        mt={{base: 0, lg: 8}}
-        gap={6}
-        width="auto"
-        height="auto"
-        minHeight="auto"
-        flexDirection="column"
-        justifyContent="center"
-      >
-
-        {/* Main Content */}
-        {spotifyCredentials && (
-          <NowPlaying
-            client_id={spotifyCredentials.client_id}
-            client_secret={spotifyCredentials.client_secret}
-            refresh_token={spotifyCredentials.refresh_token}
-          />
-        )}
-        {spotifyCredentials && (
-          <SearchSong
-            client_id={spotifyCredentials.client_id}
-            client_secret={spotifyCredentials.client_secret}
-            refresh_token={spotifyCredentials.refresh_token}
-          />
-        )}
-        {/* <CashAppSection /> */}
-
-        <ToastContainer autoClose={1500} hideProgressBar closeOnClick position="top-center" />
+      pb={{ base: 20, lg: 0 }}>
+      <Flex width={{ base: '100vw', lg: "100vw" }} height={{ base: "auto", lg: "auto" }} justifyContent="center" alignItems="center">
+        <Flex width="90vw" justifyContent="space-between" alignItems="center">
+          <Text className="app-name" color={activeTheme.primary} fontSize={{ base: "40px", lg: "68px" }}>
+            VIBEIFY.AI
+          </Text>
+          {isMobile && (
+            <ThemeToggle />
+          )}
+        </Flex>
       </Flex>
-      {/* Positioning the ThemeToggle button */}
-      <Flex mt={8} alignItems="center" flexDirection={{base: "column", lg: 'column'}} gap={{base: 4, lg: 10}}>
-        <ThemeToggle />
-        {spotifyCredentials ? (
-          <QueueDisplay
-            client_id={spotifyCredentials.client_id}
-            client_secret={spotifyCredentials.client_secret}
-            refresh_token={spotifyCredentials.refresh_token}
-          />
-        ) : (
-          <p>Loading...</p>
-        )}
+      <Flex
+        height="auto"
+        width="100vw"
+        gap={{ base: 4, lg: 8 }}
+        flexDirection="row"
+        justifyContent={{ base: 'center', lg: "center" }}
+        alignItems={{ base: "center", lg: "flex-start" }}>
+        <Flex
+          mt={{ base: 0, lg: 0 }}
+          gap={{base:2 ,lg: 6}}
+          width={{base: "auto", lg: "80%"}}
+          height="auto"
+          minHeight="auto"
+          flexDirection="column"
+          justifyContent="center"
+        >
+          {/* Main Content */}
+          {spotifyCredentials && (
+            <NowPlaying
+              client_id={spotifyCredentials.client_id}
+              client_secret={spotifyCredentials.client_secret}
+              refresh_token={spotifyCredentials.refresh_token}
+            />
+          )}
+          {spotifyCredentials && isMobile && (
+            <QueueDisplay
+              client_id={spotifyCredentials.client_id}
+              client_secret={spotifyCredentials.client_secret}
+              refresh_token={spotifyCredentials.refresh_token}
+            />
+          )}
+          {spotifyCredentials && (
+            <SearchSong
+              client_id={spotifyCredentials.client_id}
+              client_secret={spotifyCredentials.client_secret}
+              refresh_token={spotifyCredentials.refresh_token}
+            />
+          )}
+          {/* <CashAppSection /> */}
 
+          <ToastContainer autoClose={1500} hideProgressBar closeOnClick position="top-center" />
+        </Flex>
+        {spotifyCredentials && !isMobile && (
+          <Flex flexDirection="column" alignItems="center" gap={10}>
+            {!isMobile && (
+              <ThemeToggle />
+            )}
+            <QueueDisplay
+              client_id={spotifyCredentials.client_id}
+              client_secret={spotifyCredentials.client_secret}
+              refresh_token={spotifyCredentials.refresh_token}
+            />
+          </Flex>
+        )}
       </Flex>
     </Flex>
   );

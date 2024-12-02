@@ -1,46 +1,25 @@
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+@font-face {
+  font-family: 'CustomFont';
+  src: url('./fonts/Monoton/Monoton-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'CustomFont1'; // Same font-family name
+  src: url('./fonts/Bagel_Fat_One/BagelFatOne-Regular.ttf') format('truetype'); // Path to your bold font file
+  font-weight: 700; // Bold weight
+  font-style: normal; // Normal style
 }
 
-.App-header {
-  min-height: 20vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@font-face {
+  font-family: 'CustomFont2'; // Same font-family name
+  src: url('./fonts/Modak/Modak-Regular.ttf') format('truetype'); // Path to your bold font file
+  font-weight: 700; // Bold weight
+  font-style: normal; // Normal style
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (max-width: 767px) {
-
-  .App {
-    height: 90vh;
-    display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      align-items: center;
-  }
+.app-name {
+  font-family: 'CustomFont1';
 }

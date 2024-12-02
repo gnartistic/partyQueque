@@ -15,12 +15,6 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
     overflowY: "scroll",
   };
 
-  const hiddenScrollbarWebkit = {
-    "::-webkit-scrollbar": {
-      display: "none", // For WebKit browsers like Chrome, Safari
-    },
-  };
-
   const [ themeName ] = useAtom( themeAtom );
   const [ queue, setQueue ] = useAtom( queueAtom );
   const activeTheme = theme.colors[ themeName ] || theme.colors.black;
@@ -46,27 +40,29 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
 
   return (
     <Flex
+      mt={{ base: -4, lg: 0 }}
       direction={isSidebar ? "column" : "row"}
       width={isSidebar ? "150px" : "90vw"}
-      height={isSidebar ? "804px" : "100px"}
-      bgGradient={`linear(to-b, ${ activeTheme.accent }, ${ activeTheme.primary })`}
+      height={isSidebar ? "753px" : "100px"}
+      bgGradient={{ base: "none", lg: `linear(to-b, ${ activeTheme.accent }, ${ activeTheme.primary })` }}
       alignItems="center"
-      gap={4}
-      py={{ base: 0, lg: 4 }} px={{ base: 4, lg: 0 }}
+      gap={2}
+      py={{ base: 0, lg: 4 }}
       borderRadius={{ base: '20px', lg: "20px" }}
+      borderTopRadius={{base: "0px", lg: "20px"}}
     >
       {isSidebar && (
-        <Text color={activeTheme.background} fontWeight="bold" mt={2} fontSize={{ base: '14px', lg: "16px" }}>
+        <Text color={activeTheme.background} fontWeight="bold" fontSize={{ base: '14px', lg: "16px" }}>
           Up Next
         </Text>
       )}
       {/* Up Next */}
       <Box flex="1" overflowY={isSidebar ? "scroll" : "hidden"}
         overflowX={!isSidebar ? "scroll" : "hidden"}
-        style={{ ...hiddenScrollbarStyle, ...hiddenScrollbarWebkit }}>
+        style={{ ...hiddenScrollbarStyle }}>
         <Flex
           direction={isSidebar ? "column" : "row"}
-          gap={isSidebar ? 4 : 2}
+          gap={isSidebar ? 3 : 2}
         >
           {queue.map( ( track, index ) => (
             <Flex
