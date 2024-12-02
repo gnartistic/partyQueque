@@ -50,7 +50,7 @@ function SpotifyPlayer ( props )
             </Flex>
         </Flex>
     ) : (
-        <Flex className="waiting-text" height="300px" width={{ base: "90vw", lg: "75vw" }} justifyContent="center" alignItems="center">
+        <Flex height={{base: '120px', lg:"300px"}} width={{ base: "90vw", lg: "75vw" }} justifyContent="center" alignItems="center">
             <Text color={activeTheme.primary} fontSize={{base: "20px", lg: "52px"}} fontWeight={700}>Let me cook...</Text>
         </Flex>
     );

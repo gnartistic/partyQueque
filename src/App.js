@@ -98,7 +98,7 @@ function App ()
             refresh_token={spotifyCredentials.refresh_token}
           />
         ) : (
-          <p>Loading...</p> // Or any other placeholder while credentials are being fetched
+          <p>Loading...</p>
         )}
 
       </Flex>
