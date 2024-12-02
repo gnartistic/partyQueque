@@ -3,6 +3,7 @@ import { Box, Flex, Text, Image, useBreakpointValue } from "@chakra-ui/react";
 import { useAtom } from "jotai";
 import { themeAtom } from "../../atoms/theme";
 import theme from "../../theme";
+import { queueAtom } from "../../atoms/queueAtom";
 import getQueueItems from "./getQueue.js";
 import getNowPlayingItem from "../NowPlaying/nowPlaying.js";
 
@@ -20,37 +21,34 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
     },
   };
 
-  const [ queue, setQueue ] = useState( [] );
   const [ themeName ] = useAtom( themeAtom );
+  const [ queue, setQueue ] = useAtom( queueAtom );
   const activeTheme = theme.colors[ themeName ] || theme.colors.black;
 
   const isSidebar = useBreakpointValue( { base: false, md: true } ); // Sidebar for md+, row for base
 
   useEffect( () =>
   {
-    const fetchData = async () =>
+    const updateQueue = async () =>
     {
       try {
-        // Fetch queue items
-        const queueItems = await getQueueItems(
-          client_id,
-          client_secret,
-          refresh_token
-        );
-        setQueue( queueItems );
+        await getQueueItems( client_id, client_secret, refresh_token, setQueue );
       } catch( error ) {
-        console.error( "Error fetching Spotify data:", error );
+        console.error( "Error updating queue:", error );
       }
     };
 
-    fetchData();
-  }, [ client_id, client_secret, refresh_token ] );
+    // Periodically update the queue every 5 seconds
+    const interval = setInterval( updateQueue, 5000 );
+
+    return () => clearInterval( interval ); // Cleanup interval
+  }, [ client_id, client_secret, refresh_token, setQueue ] );
 
   return (
     <Flex
       direction={isSidebar ? "column" : "row"}
       width={isSidebar ? "150px" : "90vw"}
-      height={isSidebar ? "768px" : "100px"}
+      height={isSidebar ? "804px" : "100px"}
       bgGradient={`linear(to-b, ${ activeTheme.accent }, ${ activeTheme.primary })`}
       alignItems="center"
       gap={4}
