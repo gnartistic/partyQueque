@@ -41,7 +41,7 @@ const ThemeToggle = () =>
   return (
     <Box borderRadius="full">
       <IconButton mt={{base: 0, lg: 3}}
-        zIndex={9999}
+        zIndex={10}
         aria-label="Toggle theme"
         borderRadius="50%"
         onClick={toggleTheme}
