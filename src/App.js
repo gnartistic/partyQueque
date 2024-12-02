@@ -57,7 +57,8 @@ function App ()
           backgroundColor: activeTheme.background,
           color: activeTheme.primary,
           transition: "background-color 0.5s ease, color 0.5s ease",
-        }}>
+      }}
+    pb={{base: 20, lg: 0}}>
       <Flex
         mt={{base: 0, lg: 8}}
         gap={6}
