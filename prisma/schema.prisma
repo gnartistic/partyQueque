@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model party {
+  id               Int     @id @default(autoincrement())
+  positive         Int?    @default(0)
+  negative         Int?    @default(0)
+  overallrating    Float?  @default(0.0)
+  mostpopsong      String? @db.VarChar(255)
+  usercontribution String?
+  name             String  @db.VarChar(255)
+  accesscode       Int
+  userid           Int?
+  users            users?  @relation(fields: [userid], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model users {
+  id                     Int      @id @default(autoincrement())
+  firstname              String   @db.VarChar(100)
+  lastname               String   @db.VarChar(100)
+  birthday               DateTime @db.Date
+  spotifyauth            Boolean? @default(false)
+  profilepic             String?
+  favartists             String[]
+  cashapp                String?  @db.VarChar(255)
+  venmo                  String?  @db.VarChar(255)
+  paypal                 String?  @db.VarChar(255)
+  disclaimeragreed       Boolean? @default(false)
+  privacystatementagreed Boolean? @default(false)
+  termsofserviceagreed   Boolean? @default(false)
+  party                  party[]
+}

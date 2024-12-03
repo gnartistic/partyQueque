@@ -22,28 +22,28 @@ function App ()
     primary: "#444",
   };
 
-  useEffect( () =>
-  {
-    const fetchSpotifyCredentials = async () =>
-    {
+  useEffect(() => {
+    const fetchSpotifyCredentials = async () => {
       try {
-        const authToken = "xS3adzX3byAGXiEzpw";
-        const headers = new Headers( {
-          Authorization: `Bearer ${ authToken }`,
-        } );
-        const response = await fetch( "/api/spotify-auth", { headers } );
-        if( !response.ok ) {
-          throw new Error( "Failed to fetch Spotify credentials" );
+        const authToken = "xS3adzX3byAGXiEzpw"; // Replace with your actual token
+        const headers = new Headers({
+          Authorization: `Bearer ${authToken}`,
+        });
+
+        // Fetch credentials from the backend server
+        const response = await fetch("http://localhost:4000/spotify-credentials", { headers });
+        if (!response.ok) {
+          throw new Error("Failed to fetch Spotify credentials");
         }
         const data = await response.json();
-        setSpotifyCredentials( data );
-      } catch( error ) {
-        console.error( error );
+        setSpotifyCredentials(data);
+      } catch (error) {
+        console.error("Error fetching Spotify credentials:", error);
       }
     };
 
     fetchSpotifyCredentials();
-  }, [] );
+  }, []);
 
   return (
     <Flex

@@ -8,13 +8,20 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@prisma/client": "^6.0.1",
+    "@tanstack/react-query": "^4.28.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@trpc/client": "^10.45.2",
+    "@trpc/next": "^10.45.2",
+    "@trpc/react-query": "^10.45.2",
+    "@trpc/server": "^10.45.2",
     "animate.css": "^4.1.1",
     "axios": "^1.6.8",
     "boxicons": "^2.1.4",
     "buffer": "^6.0.3",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "framer-motion": "^11.12.0",
     "jotai": "^2.10.0",
@@ -27,10 +34,12 @@
     "react-toastify": "^10.0.5",
     "request": "^2.88.2",
     "sass": "^1.54.9",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "zod": "^3.23.8"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"react-scripts start\" \"npm run start:server\"",
+    "start:server": "node src/server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -52,5 +61,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "prisma": "^6.0.1"
   }
 }

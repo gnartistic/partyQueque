@@ -69,7 +69,7 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
               key={track.id}
               direction={isSidebar ? "row" : "column"}
               alignItems="center"
-              bg={index === 0 ? activeTheme.primary : activeTheme.secondary}
+              bg={index === 0 ? activeTheme.background : activeTheme.secondary}
               borderRadius="10px"
               p={2}
               flexShrink={0}
@@ -81,26 +81,6 @@ const QueueDisplay = ( { client_id, client_secret, refresh_token } ) =>
                 boxSize={{ base: "50px", xl: "100px" }}
                 borderRadius="10px"
               />
-              {/* <Box>
-                <Text
-                  fontWeight="bold"
-                  noOfLines={1}
-                  color={
-                    index === 0 ? activeTheme.background : activeTheme.primary
-                  }
-                >
-                  {track.title}
-                </Text>
-                <Text
-                  fontSize="sm"
-                  color={
-                    index === 0 ? activeTheme.accent : activeTheme.accent2
-                  }
-                  noOfLines={1}
-                >
-                  {track.artist}
-                </Text>
-              </Box> */}
             </Flex>
           ) )}
         </Flex>
