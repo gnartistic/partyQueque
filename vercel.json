@@ -22,5 +22,11 @@
     "api/trpc/[trpc]": {
       "runtime": "nodejs18.x"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/api/auth/(.*)",
+      "dest": "/api/auth/[...nextauth]"
+    }
+  ]
 }
