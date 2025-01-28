@@ -15,15 +15,13 @@ export default function SignIn({
     {
       Object.values(providers).map((provider) => signIn(provider.id));
     }
-  }, [providers]);
+  }, []);
 
   return (
     <>
-    {
-      Object.values(providers).map((provider) => (
-        <div key= { provider.name } > </div>
-      ))
-    }
+      {Object.values(providers).map((provider) => (
+        <div key={provider.name}></div>
+      ))}
     </>
   );
 }

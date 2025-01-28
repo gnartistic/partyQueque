@@ -32,6 +32,7 @@ declare module "next-auth" {
 export const authOptions: NextAuthOptions = {
   callbacks: {
     session: async ({ session, token }) => {
+
       let userID;
       let id;
       if (!token?.sub?.includes("auth0|")) {
