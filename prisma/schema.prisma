@@ -21,18 +21,22 @@ model party {
 }
 
 model users {
-  id                     Int      @id @default(autoincrement())
-  firstname              String   @db.VarChar(100)
-  lastname               String   @db.VarChar(100)
-  birthday               DateTime @db.Date
-  spotifyauth            Boolean? @default(false)
+  id                     Int       @id @default(autoincrement())
+  firstname              String?   @db.VarChar(100)
+  lastname               String?   @db.VarChar(100)
+  birthday               DateTime? @db.Date
+  spotifyauth            Boolean?  @default(false)
   profilepic             String?
   favartists             String[]
-  cashapp                String?  @db.VarChar(255)
-  venmo                  String?  @db.VarChar(255)
-  paypal                 String?  @db.VarChar(255)
-  disclaimeragreed       Boolean? @default(false)
-  privacystatementagreed Boolean? @default(false)
-  termsofserviceagreed   Boolean? @default(false)
+  cashapp                String?   @db.VarChar(255)
+  venmo                  String?   @db.VarChar(255)
+  paypal                 String?   @db.VarChar(255)
+  disclaimeragreed       Boolean?  @default(false)
+  privacystatementagreed Boolean?  @default(false)
+  termsofserviceagreed   Boolean?  @default(false)
+  lastlogin              DateTime? @db.Timestamp(6)
+  authid                 String?   @unique @db.VarChar(255)
+  loginbefore            Boolean?  @default(false)
+  email                  String    @unique @db.VarChar(255)
   party                  party[]
 }

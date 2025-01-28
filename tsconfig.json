@@ -1,0 +1,49 @@
+{
+  "compilerOptions": {
+    /* LANGUAGE COMPILATION OPTIONS */
+    "target": "es2017",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "checkJs": true,
+    "jsx": "preserve",
+
+    /* EMIT RULES */
+    "noEmit": true,
+
+    /* TYPE CHECKING RULES */
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+
+    /* OTHER OPTIONS */
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/routers/*": ["./src/server/api/routers/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/models/*": ["./src/models/*"],
+      "@/assets/*": ["./public/assets/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/state/*": ["./src/state/*"],
+      "@/server/*": ["./src/server/*"]
+    }
+  },
+  "include": [
+    ".eslintrc.cjs",
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/*.cjs",
+    "**/*.mjs",
+    "**/*.js",
+    "svgr.d.ts" // --> This is the TypeScript setup for SVG components related to @svgr/webpack dev dep
+  ],
+  "exclude": ["node_modules"]
+}
