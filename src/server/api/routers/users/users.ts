@@ -10,7 +10,6 @@ import { getAuth0Bearer } from "@/server/utils/getAuth0Bearer";
 import superjson from "superjson";
 import { findUserSchema } from "../../schemas/users/findUser.schema";
 import { TRPCError } from "@trpc/server";
-import spotifyAuth from "api/spotify-auth";
 
 const stripe = require("stripe")(env.STRIPE_SECRET_KEY);
 

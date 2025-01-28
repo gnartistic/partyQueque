@@ -21,6 +21,7 @@ const config = {
   },
   transpilePackages: ["geist"],
   trailingSlash: false,
+    output: "standalone",
 };
 
 export default config;
