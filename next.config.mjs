@@ -21,7 +21,17 @@ const config = {
   },
   transpilePackages: ["geist"],
   trailingSlash: false,
-    output: "standalone",
+  output: "standalone",
+  
+      async rewrites() {
+    return [
+      {
+        source: "/api/auth/:path*",
+        destination: "/api/auth/[...nextauth]",
+      },
+    ];
+  },
+
 };
 
 export default config;
