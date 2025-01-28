@@ -8,23 +8,20 @@ import { useEffect } from "react";
 import { authOptions } from "@/server/auth";
 import { prisma } from "@/server/db";
 
-export default function SignIn({
-  providers,
-}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+export default function SignIn({ providers }: any) {
   useEffect(() => {
-    {
-      Object.values(providers).map((provider) => signIn(provider.id));
+    if (!providers) {
+      console.error("No providers found.");
+      return;
     }
-  }, []);
 
-  return (
-    <>
-      {Object.values(providers).map((provider) => (
-        <div key={provider.name}></div>
-      ))}
-    </>
-  );
+    console.log("✅ Manually triggering signIn for Auth0");
+    signIn("auth0").catch((err) => console.error("❌ Error signing in:", err));
+  }, [providers]);
+
+  return <p>Redirecting to Auth0...</p>;
 }
+
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
