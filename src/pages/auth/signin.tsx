@@ -26,6 +26,8 @@ export default function SignIn({
   );
 }
 
+console.log("signin triggered");
+
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const session = await getServerSession(context.req, context.res, authOptions);
 
