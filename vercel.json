@@ -5,5 +5,22 @@
       "source": "/(.*)",
       "destination": "/"
     }
-  ]
+  ],
+  "functions": {
+    "api/auth/[...nextauth]": {
+      "runtime": "nodejs18.x"
+    },
+    "api/auth/logout": {
+      "runtime": "nodejs18.x"
+    },
+    "api/auth/session": {
+      "runtime": "nodejs18.x"
+    },
+    "api/auth/providers": {
+      "runtime": "nodejs18.x"
+    },
+    "api/trpc/[trpc]": {
+      "runtime": "nodejs18.x"
+    }
+  }
 }
